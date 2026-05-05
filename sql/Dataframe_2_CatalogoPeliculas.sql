@@ -23,11 +23,11 @@ CREATE OR REPLACE VIEW Vista_catalogo AS
 SELECT 
 -- Normalizamos títulos y descripciones
     f.film_id,
-    LOWER(TRIM(f.title)) AS title_clean,
-    LOWER(TRIM(f.description)) AS description_clean,
+    CONCAT(UPPER(LEFT(f.title,1)), LOWER(SUBSTRING(f.title,2))) AS title_clean,
+	CONCAT(UPPER(LEFT(f.description,1)), LOWER(SUBSTRING(f.description,2))) AS description_clean,
 -- Unificamos nombres de categoría e idioma
-    LOWER(c.name) AS category_name,
-    LOWER(l.name) AS language_name,
+	CONCAT(UPPER(LEFT(c.name,1)), LOWER(SUBSTRING(c.name,2))) AS category_name, 
+    CONCAT(UPPER(LEFT(l.name,1)), LOWER(SUBSTRING(l.name,2))) AS language_name,
     f.length,
     f.rating,
     i.inventory_id
